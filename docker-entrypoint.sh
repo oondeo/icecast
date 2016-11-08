@@ -32,8 +32,7 @@ fi
 if [ -n "$ICECAST_LOGLEVEL" ]; then
    sed -i "s/<loglevel>[^<]*<\/loglevel>/<loglevel>$ICECAST_LOGLEVEL<\/loglevel>/g" /etc/icecast.xml
 fi
-mkdir -p /var/log/icecast
-ln -s /dev/stdout /var/log/icecast/access.log
-ln -s /dev/stderr /var/log/icecast/error.log
+sed -i "s/<errorlog.*//g" /etc/icecast.xml
+sed -i "s/<accesslog.*//g" /etc/icecast.xml
 
 exec "$@"
