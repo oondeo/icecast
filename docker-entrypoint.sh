@@ -25,4 +25,8 @@ if [ -n "$ICECAST_MAX_CLIENTS" ]; then
     sed -i "s/<clients>[^<]*<\/clients>/<clients>$ICECAST_MAX_CLIENTS<\/clients>/g" /etc/icecast.xml
 fi
 
+if [ -n "$ICECAST_SSL" ]; then
+   sed -i "s/<port>8000<\/port>/<port>8443<\/port><ssl>1<\/ssl>/g" /etc/icecast.xml
+fi
+
 exec "$@"
