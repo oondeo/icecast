@@ -29,4 +29,11 @@ if [ -n "$ICECAST_SSL" ]; then
    sed -i "s/<port>8000<\/port>/<port>8443<\/port><ssl>1<\/ssl>/g" /etc/icecast.xml
 fi
 
+if [ -n "$ICECAST_LOGLEVEL" ]; then
+   sed -i "s/<loglevel>[^<]*<\/loglevel>/<loglevel>$ICECAST_LOGLEVEL<\/loglevel>/g" /etc/icecast.xml
+fi
+mkdir -p /var/log/icecast
+ln -s /dev/stdout /var/log/icecast/access.log
+ln -s /dev/stderr /var/log/icecast/error.log
+
 exec "$@"
